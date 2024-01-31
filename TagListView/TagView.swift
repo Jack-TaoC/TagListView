@@ -11,48 +11,48 @@ import UIKit
 @IBDesignable
 open class TagView: UIButton {
 
-    @IBInspectable open var cornerRadius: CGFloat = 0 {
+    @IBInspectable open var tlv_cornerRadius: CGFloat = 0 {
         didSet {
-            layer.cornerRadius = cornerRadius
-            layer.masksToBounds = cornerRadius > 0
+            layer.cornerRadius = tlv_cornerRadius
+            layer.masksToBounds = tlv_cornerRadius > 0
         }
     }
-    @IBInspectable open var borderWidth: CGFloat = 0 {
+    @IBInspectable open var tlv_borderWidth: CGFloat = 0 {
         didSet {
-            layer.borderWidth = borderWidth
-        }
-    }
-    
-    @IBInspectable open var borderColor: UIColor? {
-        didSet {
-            reloadStyles()
+            layer.borderWidth = tlv_borderWidth
         }
     }
     
-    @IBInspectable open var textColor: UIColor = UIColor.white {
+    @IBInspectable open var tlv_borderColor: UIColor? {
         didSet {
             reloadStyles()
         }
     }
-    @IBInspectable open var selectedTextColor: UIColor = UIColor.white {
+    
+    @IBInspectable open var tlv_textColor: UIColor = UIColor.white {
         didSet {
             reloadStyles()
         }
     }
-    @IBInspectable open var titleLineBreakMode: NSLineBreakMode = .byTruncatingMiddle {
+    @IBInspectable open var tlv_selectedTextColor: UIColor = UIColor.white {
         didSet {
-            titleLabel?.lineBreakMode = titleLineBreakMode
+            reloadStyles()
         }
     }
-    @IBInspectable open var paddingY: CGFloat = 2 {
+    @IBInspectable open var tlv_titleLineBreakMode: NSLineBreakMode = .byTruncatingMiddle {
         didSet {
-            titleEdgeInsets.top = paddingY
-            titleEdgeInsets.bottom = paddingY
+            titleLabel?.lineBreakMode = tlv_titleLineBreakMode
         }
     }
-    @IBInspectable open var paddingX: CGFloat = 5 {
+    @IBInspectable open var tlv_paddingY: CGFloat = 2 {
         didSet {
-            titleEdgeInsets.left = paddingX
+            titleEdgeInsets.top = tlv_paddingY
+            titleEdgeInsets.bottom = tlv_paddingY
+        }
+    }
+    @IBInspectable open var tlv_paddingX: CGFloat = 5 {
+        didSet {
+            titleEdgeInsets.left = tlv_paddingX
             updateRightInsets()
         }
     }
@@ -69,21 +69,21 @@ open class TagView: UIButton {
         }
     }
     
-    @IBInspectable open var selectedBorderColor: UIColor? {
+    @IBInspectable open var tlv_selectedBorderColor: UIColor? {
         didSet {
             reloadStyles()
         }
     }
     
-    @IBInspectable open var selectedBackgroundColor: UIColor? {
+    @IBInspectable open var tlv_selectedBackgroundColor: UIColor? {
         didSet {
             reloadStyles()
         }
     }
     
-    @IBInspectable open var textFont: UIFont = .systemFont(ofSize: 12) {
+    @IBInspectable open var tlv_textFont: UIFont = .systemFont(ofSize: 12) {
         didSet {
-            titleLabel?.font = textFont
+            titleLabel?.font = tlv_textFont
         }
     }
     
@@ -96,14 +96,14 @@ open class TagView: UIButton {
             }
         }
         else if isSelected {
-            backgroundColor = selectedBackgroundColor ?? tagBackgroundColor
-            layer.borderColor = selectedBorderColor?.cgColor ?? borderColor?.cgColor
-            setTitleColor(selectedTextColor, for: UIControl.State())
+            backgroundColor = tlv_selectedBackgroundColor ?? tagBackgroundColor
+            layer.borderColor = tlv_selectedBorderColor?.cgColor ?? tlv_borderColor?.cgColor
+            setTitleColor(tlv_selectedTextColor, for: UIControl.State())
         }
         else {
             backgroundColor = tagBackgroundColor
-            layer.borderColor = borderColor?.cgColor
-            setTitleColor(textColor, for: UIControl.State())
+            layer.borderColor = tlv_borderColor?.cgColor
+            setTitleColor(tlv_textColor, for: UIControl.State())
         }
     }
     
@@ -168,7 +168,7 @@ open class TagView: UIButton {
     }
     
     private func setupView() {
-        titleLabel?.lineBreakMode = titleLineBreakMode
+        titleLabel?.lineBreakMode = tlv_titleLineBreakMode
 
         frame.size = intrinsicContentSize
         addSubview(removeButton)
@@ -185,31 +185,31 @@ open class TagView: UIButton {
     // MARK: - layout
 
     override open var intrinsicContentSize: CGSize {
-        var size = titleLabel?.text?.size(withAttributes: [NSAttributedString.Key.font: textFont]) ?? CGSize.zero
-        size.height = textFont.pointSize + paddingY * 2
-        size.width += paddingX * 2
+        var size = titleLabel?.text?.size(withAttributes: [NSAttributedString.Key.font: tlv_textFont]) ?? CGSize.zero
+        size.height = tlv_textFont.pointSize + tlv_paddingY * 2
+        size.width += tlv_paddingX * 2
         if size.width < size.height {
             size.width = size.height
         }
         if enableRemoveButton {
-            size.width += removeButtonIconSize + paddingX
+            size.width += removeButtonIconSize + tlv_paddingX
         }
         return size
     }
     
     private func updateRightInsets() {
         if enableRemoveButton {
-            titleEdgeInsets.right = paddingX  + removeButtonIconSize + paddingX
+            titleEdgeInsets.right = tlv_paddingX  + removeButtonIconSize + tlv_paddingX
         }
         else {
-            titleEdgeInsets.right = paddingX
+            titleEdgeInsets.right = tlv_paddingX
         }
     }
     
     open override func layoutSubviews() {
         super.layoutSubviews()
         if enableRemoveButton {
-            removeButton.frame.size.width = paddingX + removeButtonIconSize + paddingX
+            removeButton.frame.size.width = tlv_paddingX + removeButtonIconSize + tlv_paddingX
             removeButton.frame.origin.x = self.frame.width - removeButton.frame.width
             removeButton.frame.size.height = self.frame.height
             removeButton.frame.origin.y = 0

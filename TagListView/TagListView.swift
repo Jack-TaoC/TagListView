@@ -16,26 +16,26 @@ import UIKit
 @IBDesignable
 open class TagListView: UIView {
     
-    @IBInspectable open dynamic var textColor: UIColor = .white {
+    @IBInspectable open dynamic var tlv_textColor: UIColor = .white {
         didSet {
             tagViews.forEach {
-                $0.textColor = textColor
+                $0.tlv_textColor = tlv_textColor
             }
         }
     }
     
-    @IBInspectable open dynamic var selectedTextColor: UIColor = .white {
+    @IBInspectable open dynamic var tlv_selectedTextColor: UIColor = .white {
         didSet {
             tagViews.forEach {
-                $0.selectedTextColor = selectedTextColor
+                $0.tlv_selectedTextColor = tlv_selectedTextColor
             }
         }
     }
 
-    @IBInspectable open dynamic var tagLineBreakMode: NSLineBreakMode = .byTruncatingMiddle {
+    @IBInspectable open dynamic var tlv_tagLineBreakMode: NSLineBreakMode = .byTruncatingMiddle {
         didSet {
             tagViews.forEach {
-                $0.titleLineBreakMode = tagLineBreakMode
+                $0.tlv_titleLineBreakMode = tlv_tagLineBreakMode
             }
         }
     }
@@ -59,70 +59,70 @@ open class TagListView: UIView {
     @IBInspectable open dynamic var tagSelectedBackgroundColor: UIColor? {
         didSet {
             tagViews.forEach {
-                $0.selectedBackgroundColor = tagSelectedBackgroundColor
+                $0.tlv_selectedBackgroundColor = tagSelectedBackgroundColor
             }
         }
     }
     
-    @IBInspectable open dynamic var cornerRadius: CGFloat = 0 {
+    @IBInspectable open dynamic var tlv_cornerRadius: CGFloat = 0 {
         didSet {
             tagViews.forEach {
-                $0.cornerRadius = cornerRadius
+                $0.tlv_cornerRadius = tlv_cornerRadius
             }
         }
     }
-    @IBInspectable open dynamic var borderWidth: CGFloat = 0 {
+    @IBInspectable open dynamic var tlv_borderWidth: CGFloat = 0 {
         didSet {
             tagViews.forEach {
-                $0.borderWidth = borderWidth
-            }
-        }
-    }
-    
-    @IBInspectable open dynamic var borderColor: UIColor? {
-        didSet {
-            tagViews.forEach {
-                $0.borderColor = borderColor
+                $0.tlv_borderWidth = tlv_borderWidth
             }
         }
     }
     
-    @IBInspectable open dynamic var selectedBorderColor: UIColor? {
+    @IBInspectable open dynamic var tlv_borderColor: UIColor? {
         didSet {
             tagViews.forEach {
-                $0.selectedBorderColor = selectedBorderColor
+                $0.tlv_borderColor = tlv_borderColor
             }
         }
     }
     
-    @IBInspectable open dynamic var paddingY: CGFloat = 2 {
+    @IBInspectable open dynamic var tlv_selectedBorderColor: UIColor? {
+        didSet {
+            tagViews.forEach {
+                $0.tlv_selectedBorderColor = tlv_selectedBorderColor
+            }
+        }
+    }
+    
+    @IBInspectable open dynamic var tlv_paddingY: CGFloat = 2 {
         didSet {
             defer { rearrangeViews() }
             tagViews.forEach {
-                $0.paddingY = paddingY
+                $0.tlv_paddingY = tlv_paddingY
             }
         }
     }
-    @IBInspectable open dynamic var paddingX: CGFloat = 5 {
+    @IBInspectable open dynamic var tlv_paddingX: CGFloat = 5 {
         didSet {
             defer { rearrangeViews() }
             tagViews.forEach {
-                $0.paddingX = paddingX
+                $0.tlv_paddingX = tlv_paddingX
             }
         }
     }
-    @IBInspectable open dynamic var marginY: CGFloat = 2 {
+    @IBInspectable open dynamic var tlv_marginY: CGFloat = 2 {
         didSet {
             rearrangeViews()
         }
     }
-    @IBInspectable open dynamic var marginX: CGFloat = 5 {
+    @IBInspectable open dynamic var tlv_marginX: CGFloat = 5 {
         didSet {
             rearrangeViews()
         }
     }
 
-    @IBInspectable open dynamic var minWidth: CGFloat = 0 {
+    @IBInspectable open dynamic var tlv_minWidth: CGFloat = 0 {
         didSet {
             rearrangeViews()
         }
@@ -135,27 +135,27 @@ open class TagListView: UIView {
         case leading
         case trailing
     }
-    @IBInspectable open var alignment: Alignment = .leading {
+    @IBInspectable open var tlv_alignment: Alignment = .leading {
         didSet {
             rearrangeViews()
         }
     }
-    @IBInspectable open dynamic var shadowColor: UIColor = .white {
+    @IBInspectable open dynamic var tlv_shadowColor: UIColor = .white {
         didSet {
             rearrangeViews()
         }
     }
-    @IBInspectable open dynamic var shadowRadius: CGFloat = 0 {
+    @IBInspectable open dynamic var tlv_shadowRadius: CGFloat = 0 {
         didSet {
             rearrangeViews()
         }
     }
-    @IBInspectable open dynamic var shadowOffset: CGSize = .zero {
+    @IBInspectable open dynamic var tlv_shadowOffset: CGSize = .zero {
         didSet {
             rearrangeViews()
         }
     }
-    @IBInspectable open dynamic var shadowOpacity: Float = 0 {
+    @IBInspectable open dynamic var tlv_shadowOpacity: Float = 0 {
         didSet {
             rearrangeViews()
         }
@@ -196,11 +196,11 @@ open class TagListView: UIView {
         }
     }
     
-    @objc open dynamic var textFont: UIFont = .systemFont(ofSize: 12) {
+    @objc open dynamic var tlv_textFont: UIFont = .systemFont(ofSize: 12) {
         didSet {
             defer { rearrangeViews() }
             tagViews.forEach {
-                $0.textFont = textFont
+                $0.tlv_textFont = tlv_textFont
             }
         }
     }
@@ -251,7 +251,7 @@ open class TagListView: UIView {
             isRtl = shared.userInterfaceLayoutDirection == .leftToRight
         }
         
-        var alignment = self.alignment
+        var alignment = self.tlv_alignment
         
         if alignment == .leading {
             alignment = isRtl ? .right : .left
@@ -280,7 +280,7 @@ open class TagListView: UIView {
                 currentRowTagCount = 0
                 currentRowView = UIView()
                 currentRowView.transform = directionTransform
-                currentRowView.frame.origin.y = CGFloat(currentRow - 1) * (tagViewHeight + marginY)
+                currentRowView.frame.origin.y = CGFloat(currentRow - 1) * (tagViewHeight + tlv_marginY)
                 
                 rowViews.append(currentRowView)
                 addSubview(currentRowView)
@@ -294,27 +294,27 @@ open class TagListView: UIView {
                 x: currentRowWidth,
                 y: 0)
             tagBackgroundView.frame.size = tagView.bounds.size
-            tagView.frame.size.width = max(minWidth, tagView.frame.size.width)
-            tagBackgroundView.layer.shadowColor = shadowColor.cgColor
-            tagBackgroundView.layer.shadowPath = UIBezierPath(roundedRect: tagBackgroundView.bounds, cornerRadius: cornerRadius).cgPath
-            tagBackgroundView.layer.shadowOffset = shadowOffset
-            tagBackgroundView.layer.shadowOpacity = shadowOpacity
-            tagBackgroundView.layer.shadowRadius = shadowRadius
+            tagView.frame.size.width = max(tlv_minWidth, tagView.frame.size.width)
+            tagBackgroundView.layer.shadowColor = tlv_shadowColor.cgColor
+            tagBackgroundView.layer.shadowPath = UIBezierPath(roundedRect: tagBackgroundView.bounds, cornerRadius: tlv_cornerRadius).cgPath
+            tagBackgroundView.layer.shadowOffset = tlv_shadowOffset
+            tagBackgroundView.layer.shadowOpacity = tlv_shadowOpacity
+            tagBackgroundView.layer.shadowRadius = tlv_shadowRadius
             tagBackgroundView.addSubview(tagView)
             currentRowView.addSubview(tagBackgroundView)
             
             currentRowTagCount += 1
-            currentRowWidth += tagView.frame.width + marginX
+            currentRowWidth += tagView.frame.width + tlv_marginX
             
             switch alignment {
             case .leading: fallthrough // switch must be exahutive
             case .left:
                 currentRowView.frame.origin.x = 0
             case .center:
-                currentRowView.frame.origin.x = (frameWidth - (currentRowWidth - marginX)) / 2
+                currentRowView.frame.origin.x = (frameWidth - (currentRowWidth - tlv_marginX)) / 2
             case .trailing: fallthrough // switch must be exahutive
             case .right:
-                currentRowView.frame.origin.x = frameWidth - (currentRowWidth - marginX)
+                currentRowView.frame.origin.x = frameWidth - (currentRowWidth - tlv_marginX)
             }
             currentRowView.frame.size.width = currentRowWidth
             currentRowView.frame.size.height = max(tagViewHeight, currentRowView.frame.height)
@@ -327,9 +327,9 @@ open class TagListView: UIView {
     // MARK: - Manage tags
     
     override open var intrinsicContentSize: CGSize {
-        var height = CGFloat(rows) * (tagViewHeight + marginY)
+        var height = CGFloat(rows) * (tagViewHeight + tlv_marginY)
         if rows > 0 {
-            height -= marginY
+            height -= tlv_marginY
         }
         return CGSize(width: frame.width, height: height)
     }
@@ -337,19 +337,19 @@ open class TagListView: UIView {
     private func createNewTagView(_ title: String) -> TagView {
         let tagView = TagView(title: title)
         
-        tagView.textColor = textColor
-        tagView.selectedTextColor = selectedTextColor
+        tagView.tlv_textColor = tlv_textColor
+        tagView.tlv_selectedTextColor = tlv_selectedTextColor
         tagView.tagBackgroundColor = tagBackgroundColor
         tagView.highlightedBackgroundColor = tagHighlightedBackgroundColor
-        tagView.selectedBackgroundColor = tagSelectedBackgroundColor
-        tagView.titleLineBreakMode = tagLineBreakMode
-        tagView.cornerRadius = cornerRadius
-        tagView.borderWidth = borderWidth
-        tagView.borderColor = borderColor
-        tagView.selectedBorderColor = selectedBorderColor
-        tagView.paddingX = paddingX
-        tagView.paddingY = paddingY
-        tagView.textFont = textFont
+        tagView.tlv_selectedBackgroundColor = tagSelectedBackgroundColor
+        tagView.tlv_titleLineBreakMode = tlv_tagLineBreakMode
+        tagView.tlv_cornerRadius = tlv_cornerRadius
+        tagView.tlv_borderWidth = tlv_borderWidth
+        tagView.tlv_borderColor = tlv_borderColor
+        tagView.tlv_selectedBorderColor = tlv_selectedBorderColor
+        tagView.tlv_paddingX = tlv_paddingX
+        tagView.tlv_paddingY = tlv_paddingY
+        tagView.tlv_textFont = tlv_textFont
         tagView.removeIconLineWidth = removeIconLineWidth
         tagView.removeButtonIconSize = removeButtonIconSize
         tagView.enableRemoveButton = enableRemoveButton
